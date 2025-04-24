@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="Clash.webp" type="image/x-icon">
+	<link rel="stylesheet" href="styles.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+	<script defer src="script.js"></script>
+  <title>Clash Convertor</title>
+</head>
+<body>
+  <div class="wrapper">
+	<div id="logo">
+    <img src="logo.png" alt="Логотип" style="display: inline-block; vertical-align: middle; max-width: 100px;">
+    <span class="logo-text">Clash Convertor</span>
+</div>
+		<div class="infobtn">
+			<div class="file-list" id="fileList"> 
+			<textarea 
+				id="yamlInput" 
+				class="Input" 
+				rows="1" 
+				placeholder="Вставьте подписку сюда..."
+				autocomplete="off" 
+				autocorrect="off" 
+				autocapitalize="off" 
+				spellcheck="false"
+				></textarea>
+			<button onclick="convert()">Конвертировать</button>
+			</div>
+			<div class="result" id="output">
+				<div class="button-container hidden" id="downloadBtnCT">
+					<button class="download-btn" id="downloadBtn">Скачать</button>
+					<button class="download-btn" id="copyBtn">Скопировать</button>
+				</div>
+				<textarea id="yamlOutput" placeholder="Результат появится здесь..."
+				class="Output" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+				<div class="switch">
+				<label class="toggle">
+					<input class="toggle-checkbox" type="checkbox" id="rules">
+					<div class="toggle-switch"></div>
+					<span class="toggle-label">Правила</span>
+				</label>
+				<label class="toggle">
+					<input class="toggle-checkbox" type="checkbox" id="warp">
+					<div class="toggle-switch"></div>
+					<span class="toggle-label">WARP</span>
+				</label>
+				<label class="toggle">
+					<input class="toggle-checkbox" type="checkbox" id="config">
+					<div class="toggle-switch"></div>
+					<span class="toggle-label">Другой конфиг</span>
+				</label>
+				</div>
+			</div>
+			<button id="warpButton" style="width: 100%; max-width: 400px;"><span class="button__text">Другие проекты</span></button>
+
+			<div id="info1">Конвертация URI (vless://, trojan:// и т.д.) может быть с ошибками.<br>Если вы заметили такую, прошу сообщить об этом автору</div>
+		</div>
+	</div>
+	<div id="warpModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p align="center">Выберите конфиг WARP. Конфиг можно получить <a href="https://config-generator-warp.vercel.app/" target="_blank">тут</a></p>
+    <button id="selectWarpConfig">Выбрать конфиг</button>
+  </div>
+</div>
+<div id="configModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeConfigModal()">&times;</span>
+    <p align="center">Выберите конфиг .yaml для слияния</p>
+    <button id="selectConfig">Выбрать конфиг</button>
+  </div>
+</div>
+</body></html>
