@@ -29,51 +29,14 @@ document.getElementById('selectWarpConfig').addEventListener('click', function()
   const fileInput = document.createElement('input');
   fileInput.type = 'file';
   fileInput.accept = '.yaml,.yml';
-
-  fileInput.addEventListener('change', async function(e) {
+  
+  fileInput.addEventListener('change', function(e) {
     if (e.target.files.length > 0) {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-
-      reader.onload = function(event) {
-        try {
-          const warpConfig = jsyaml.load(event.target.result); // Загружаем YAML файл
-          const outputTextarea = document.getElementById('yamlOutput');
-          const currentOutput = outputTextarea.value.trim();
-
-          if (!currentOutput) {
-            // Если output пустой, выводим весь конфиг WARP
-            outputTextarea.value = event.target.result;
-          } else {
-            // Парсим текущий output
-            const currentConfig = jsyaml.load(currentOutput);
-
-            // Добавляем proxies из WARP конфига в текущий config
-            currentConfig.proxies = currentConfig.proxies || [];
-            warpConfig.proxies.forEach(proxy => {
-              currentConfig.proxies.push(proxy);
-            });
-
-            // Добавляем proxy-groups из WARP конфига в текущий config
-            currentConfig['proxy-groups'] = currentConfig['proxy-groups'] || [];
-            warpConfig['proxy-groups'].forEach(group => {
-              currentConfig['proxy-groups'].push(group);
-            });
-
-            // Обновляем вывод
-            outputTextarea.value = jsyaml.dump(currentConfig);
-          }
-
-          warpModal.style.display = 'none';
-        } catch (error) {
-          showError('Ошибка при обработке WARP конфига: ' + error.message);
-        }
-      };
-
-      reader.readAsText(file);
+      warpModal.style.display = 'none';
     }
   });
 
+  
   fileInput.click();
 });
 
